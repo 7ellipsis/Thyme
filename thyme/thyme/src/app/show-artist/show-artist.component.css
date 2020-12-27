@@ -1,0 +1,59 @@
+#colora {
+    background: linear-gradient(90deg,black, #ee7752, #e73c7e, #160286, #074fbd);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+.scrolling-wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+  }
+  .content {
+    backdrop-filter: blur(5px) opacity(.3);
+  } 
+    .cards {
+      display: inline-block;
+    }
+    .profile-img-container {
+      position: relative;
+      display: inline-block; /* added */
+      overflow: hidden; /* added */
+      
+      border: 0px;
+      
+  }
+  .profile-img-container:hover a {
+      opacity: 1; /* added */
+      top: 0; /* added */
+      z-index: 500;
+     background: black;
+     opacity: 0.6;
+  }
+  /* added */
+  .profile-img-container:hover a i {
+      top: 50%;
+      position: absolute;
+      left: 0;
+      right: 0;
+      transform: translateY(-50%);
+  }
+
+  /* added */
+  .profile-img-container a {
+      display: block;
+      position: absolute;
+      top: -100%;
+      opacity: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      text-align: center;
+      color: inherit;
+  }
+  .show{
+    visibility: visible;
+  }
+  .hide{
+    visibility: hidden;
+  }
+  

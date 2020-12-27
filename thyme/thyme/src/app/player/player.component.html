@@ -1,0 +1,97 @@
+
+<div style="height:80%; background-repeat:no-repeat; border-radius: 10px; background-size: cover;background-position: center;"
+    id="image">
+    <div class="alert alert-dark xalert" id="follow" role="alert" style="position: relative;">
+         Followed!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="alert alert-danger xalert" id="unfollow" role="alert" style="position: relative;">
+         UnFollowed!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <p style="font-size: 40px;padding-bottom: 0; margin: 0;" class=content>thyme-music</p>
+    <p id="namecurr1" style="font-size: 18px; width: 100%; word-wrap: break-word; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; padding-top: 0px;" class=content></p>
+    <span *ngIf="!likedSong" data-id="currentid" class="heartab" #one id="heartab" (click)="like(one,'e')"></span>
+    <span *ngIf="likedSong" data-id="currentid" class="heartab heart-blastab" id="heartabc" #two
+        (click)="dislike(two,'e')"></span>
+</div>
+<div class="modal fade" id="queue" >
+    <div class="modal-dialog">
+        <div class="modal-content" style="text-align: center;">
+            <button type="button" data-dismiss="modal" class="close">&times;</button>
+            <div class="modal-body">
+                <p style="font-size: 30px;float:left">Next</p>
+                <div class="card" style="width:100px; height:100;background-color: black;" *ngIf="nextsrc">
+                    <img src="{{nextsrc}}" class="card-img-top" alt="..." width="100px"
+                        height="100px"  (click)="plays(songid)">
+                    <div class="card-body" style="background-color: black;">
+                        <p class="card-text" style="color:gray; font-size: smaller;"> {{songname}} {{artistname}}
+                            {{album}}</p>
+                    </div>
+                </div>
+                <p style="font-size: 30px; float:right">Previous</p>
+                <div class="card"style="width:100px; height:100; float:right;background-color: black;" *ngIf="previoussrc">
+                    <img src="{{previoussrc}}" width="100px" height="100"
+                        (click)="plays(songid1)" class="card-img-top" alt="...">
+                    <div class="card-body" style="background-color: black;">
+                        <p class="card-text" style="color:gray; font-size: smaller;"> {{songname1}} {{artistname1}}
+                            {{album1}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="height:3%;"></div>
+<div style="height:17%;">
+    <div id="parent">
+        <p id="albumcurr" style="font-size: 10px;text-overflow: ellipsis;"></p>
+        <div id="controls">
+            <i class="fa fa-list" aria-hidden="true" data-toggle="modal" data-target="#queue" data-backdrop="true"
+                style="cursor:pointer;font-size: 15px; margin-left: 10px;" onmouseover="this.style.fontSize='20px'"
+                onmouseout="this.style.fontSize='15px'" aria-hidden="true"></i>
+            <i class="fa fa-random" style="cursor:pointer;font-size: 15px; margin-left: 10px;"
+                onmouseover="this.style.fontSize='20px'" onmouseout="this.style.fontSize='15px'" aria-hidden="true"
+                (click)="shuffle()"></i>
+            <i class="fa fa-backward" aria-hidden="true" style="cursor:pointer;font-size: 15px; margin-left: 10px;"
+                onmouseover="this.style.fontSize='20px'" onmouseout="this.style.fontSize='15px'"
+                (click)="previous()"></i>
+            <i class="fa fa-play" onclick="playerss()" id="playicon" aria-hidden="true"
+                style=" margin-left: 10px;cursor:pointer;font-size: 15px;" onmouseover="this.style.fontSize='20px'"
+                onmouseout="this.style.fontSize='15px'"></i>
+            <i class="fa fa-forward" (click)="next()" aria-hidden="true"
+                style=" margin-left: 10px;cursor:pointer;font-size: 15px;" onmouseover="this.style.fontSize='20px'"
+                onmouseout="this.style.fontSize='15px'"></i>
+            <i class="fa fa-retweet" style="cursor:pointer;font-size: 15px; margin-left: 10px;" id="reverse"
+                onmouseover="this.style.fontSize='20px'" onmouseout="this.style.fontSize='15px'" aria-hidden="true"
+                (click)="repeat()"></i>
+            <ng-template #popContent popoverClass="my-custom-class">
+                <p style="cursor:pointer;color: antiquewhite;">Available Devices</p>
+            </ng-template>
+            <ng-template #popTitle popoverClass="my-custom-class">
+                <p *ngFor="let list of device" style="cursor:pointer; text-align: center;" #d
+                    attr.data-device="{{list['id']}}" id="text" (click)=setDevice(d)>
+                    <i class="fa fa-mobile" aria-hidden="true" onmouseover="this.style.fontSize='20px'"
+                        onmouseout="this.style.fontSize='15px'"></i> {{list['name']}}
+                </p>
+            </ng-template>
+            <i class="fa fa-laptop" onmouseover="this.style.fontSize='20px'" onmouseout="this.style.fontSize='15px'"
+                (click)="devices()" popoverClass="my-custom-class" [ngbPopover]="popContent" [popoverTitle]="popTitle"
+                aria-hidden="true"
+                style=" margin-left: 10px;cursor:pointer; color: rgb(22, 75, 252);font-size: 15px;"></i>
+            <i class="fa fa-volume-down" onmouseover="this.style.fontSize='20px'"
+                onmouseout="this.style.fontSize='15px'" id="vols"
+                style=" margin-left: 10px;cursor:pointer;color: yellow;font-size: 15px;" (click)="mute()"></i>
+            <input id="volume" type="range" #vol style="  margin-left: 10px; width: 70px;" min="0" max="100"
+                oninput="icon(this.value)" (input)="volume(vol.value)">
+            <div style=" margin: 0; padding: 0;">
+                <input value=0 type="range" #bar step=1 style="width:100%; margin: 0;padding:0;" id="p" min="0"
+                    max="100" onchange="seek(this.value)" />
+            </div>
+        </div>
+    </div>
+</div>

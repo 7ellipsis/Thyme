@@ -1,0 +1,64 @@
+#parent
+{
+ padding: 0;  
+    margin: 0;
+    text-align: center;
+    
+}
+.content {
+    backdrop-filter: blur(5px) opacity(.5);
+  } 
+#controls
+{  
+display: inline-block;
+padding: 0;
+margin: 0;
+}
+#text
+{
+    color: black;
+}
+.modal-content {
+    background-color: rgba(5, 5, 5, 0.5) !important;
+    width: 150%;
+      backdrop-filter: blur(5px) opacity(.3);
+      text-align: center;
+   
+  }
+  .modal{
+    background-color: #076de20e;
+  }
+button
+{
+    
+    border: 0!important;
+}
+#vols{
+    font-size: 20px;
+}
+#p{
+    width:70%!important;
+    margin-left: 15%;
+}
+input[type='range']
+{
+    height:4px;
+    
+}
+ 
+.heartab {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 50%;
+    top: 80%;
+    transform: translate(-50%, -50%);
+    background: url(http://imagizer.imageshack.com/img923/4545/XdJDuY.png) no-repeat;  
+    cursor: pointer;
+    z-index:200;
+    
+  }
+  .heart-blastab {
+    background-position: -2800px 0;
+    transition: background 1s steps(28);
+  }

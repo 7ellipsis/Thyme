@@ -1,0 +1,42 @@
+.content {
+    backdrop-filter: blur(10px) opacity(.3);
+  } 
+  .hearta {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 75%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: url(http://imagizer.imageshack.com/img923/4545/XdJDuY.png) no-repeat;  
+    cursor: pointer;
+    
+  }
+  .heart-blasta {
+    background-position: -2800px 0;
+    transition: background 1s steps(28);
+  }
+  #colora {
+    background: linear-gradient(-45deg,black, #ee7752, #e73c7e, #160286, #074fbd);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+.btn-primary{
+border: 0;
+border-radius: 15px;
+width:150px;
+display: inline-block;
+margin-left:2%;
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: white;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: white;
+}

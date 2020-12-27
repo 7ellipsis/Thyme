@@ -1,0 +1,141 @@
+<br>
+<div style="text-align:center">
+    <input type="text" #search placeholder="Search"
+        style="width:350px; margin: auto; border-radius: 30px; background-color: green;" class="btn" />
+    <button (click)="app(search.value)" class="btn btn-warning" style="border-radius: 100px;"><i
+            class="fa fa-arrow-right" aria-hidden="true"></i></button>
+</div>
+<div class="main" id="main" style="padding-left:3%; margin-left: 3%;">
+    <div *ngIf="artist.length">
+        <p style="font-size:30px;">artist</p>
+        <div class="scrolling-wrapper">
+            <div class="cards" *ngFor="let list of artist"
+                style="width:145px; border-radius: 5px; text-align: center; ">
+                <div class="card" style="display: flex;border: 0px;">
+                    <img class="card-img-top" src="{{list['images'][1]['url']}}" alt="Card image cap"
+                        style="width:145px;height:145px;" (click)="artists(list['href'])">
+                    <div class="card-body">
+
+                        <p class="card-title" style="font-size: small; text-overflow: ellipsis;
+                            overflow: hidden;
+                            white-space: nowrap; ">{{list['name']}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="track.length">
+
+        <p style="font-size:30px;">tracks</p>
+
+        <div class="scrolling-wrapper">
+            <div class="cards" *ngFor="let list of track"
+                style="width:145px; border-radius: 5px; text-align: center;border: 0px;">
+                <div class="card" style="display: flex;border: 0px;  ">
+                    <img class="card-img-top" src="{{list['album']['images'][0]['url']}}" alt="Card image cap"
+                        style="width:145px;height:145px; border-radius: 5px;">
+                    <div class="card-body">
+                        <p class="card-title" style="white-space: pre-wrap;font-size: small">{{list['name']}}</p>
+                        <br>
+                        <i class="fa fa-play" aria-hidden="true" (click)="play(list['uri'])"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="album.length">
+
+        <p style="font-size:30px;">albums</p>
+
+        <div class="scrolling-wrapper">
+            <div class="cards" *ngFor="let list of album" style="width:145px; border-radius: 5px; text-align: center; ">
+                <div class="card" style="display: flex;border: 0px;">
+                    <img (click)="albums(list['uri'])" class="card-img-top" src="{{list['images'][0]['url']}}"
+                        alt="Card image cap" style="width:145px;height:145px; border-radius: 5px;">
+                    <div class="card-body">
+
+                        <p class="card-title" style="font-size: small; text-overflow: ellipsis;
+                            overflow: hidden;
+                            white-space: nowrap; ">{{list['name']}}</p>
+
+                        <p class="card-text" style="font-size:12px;white-space: pre-wrap;">
+                            {{list['artists'][0]['name']}}</p>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="playlist.length">
+
+        <p style="font-size:30px;">playlists</p>
+
+        <div class="scrolling-wrapper">
+            <div class="cards" *ngFor="let list of playlist"
+                style="width:145px; border-radius: 5px; text-align: center; ">
+                <div class="card" style="display: flex;border: 0px;">
+                    <img (click)="playlists(list['href'])" class="card-img-top" src="{{list['images'][0]['url']}}"
+                        alt="Card image cap" style="width:145px;height:145px; border-radius: 5px;">
+                    <div class="card-body">
+
+                        <p class="card-title" style="font-size: small; text-overflow: ellipsis;
+                            overflow: hidden;
+                            white-space: nowrap; ">{{list['name']}}</p>
+
+                        <p class="card-text" style="font-size:12px;white-space: pre-wrap;">
+                            {{list['owner']['display_name']}}</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="shows.length">
+
+        <p style="font-size:30px;">podcasts</p>
+
+        <div class="scrolling-wrapper">
+            <div class="cards" *ngFor="let list of shows" style="width:145px; border-radius: 5px; text-align: center; ">
+                <div class="card" style="display: flex;border: 0px;">
+                    <img (click)="podcasts(list['href'])" class="card-img-top" src="{{list['images'][0]['url']}}"
+                        alt="Card image cap" style="width:145px;height:145px; border-radius: 5px;">
+                    <div class="card-body">
+
+                        <p class="card-title" style="font-size: small; text-overflow: ellipsis;
+                            overflow: hidden;
+                            white-space: nowrap; ">{{list['name']}}</p>
+
+                        <p class="card-text" style="font-size:12px;white-space: pre-wrap;">
+                            {{list['publisher']}}</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="episodes.length">
+
+        <p style="font-size:30px;">episodes</p>
+
+        <div class="scrolling-wrapper">
+            <div class="cards" *ngFor="let list of episodes"
+                style="width:145px; border-radius: 5px; text-align: center; ">
+                <div class="card" style="display: flex;border: 0px;">
+                    <img (click)="podcasts(list['href'])" class="card-img-top" src="{{list['images'][0]['url']}}"
+                        alt="Card image cap" style="width:145px;height:145px; border-radius: 5px;">
+                    <div class="card-body">
+
+                        <p class="card-title" style="font-size: small; text-overflow: ellipsis;
+                            overflow: hidden;
+                            white-space: nowrap; ">{{list['name']}}</p>
+                        <br>
+                        <i class="fa fa-play" aria-hidden="true" (click)="play(list['uri'])"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<br><br>

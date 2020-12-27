@@ -1,0 +1,181 @@
+<div class="container-fluid" id="main">
+    <div class="alert alert-dark xalert" id="follow2" role="alert" style="position: relative;">
+        Artist Followed!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="alert alert-danger xalert" id="unfollow2" role="alert" style="position: relative;">
+        Artist UnFollowed!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="row">
+        <div class="col-lg-4" id="cover" [ngStyle]="{'background-image': 'url(' +this.artistImage+ ')'}"
+            style="background-size: cover;  background-position: center;overflow: hidden; padding: 0;margin: 0;">
+            <div class=content style="width: 100%; padding: 0; margin:0;">
+                <p style="font-size: 40px;">artist</p>
+            </div>
+        </div>
+        <div class="col-lg-8" style="height: 100vh;overflow-y:auto;padding-left: 5px; width: 100%;">
+            <div [ngStyle]="{'background-image': 'url(' +this.artistImage+ ')'}"
+                style="background-size: cover;  background-position: right;">
+                <div class="content">
+                    <p style="font-size: 60px;">{{artistName}}</p>
+                    <p style="font-size: 12px; padding-left: 2%;">Genre: {{artistgenre}}</p>
+                    <span style="font-size: 12px; padding-left: 2%;">Followers: {{artistFollowers}}</span>
+                                <span class="heart" (click)="like(artistId)" *ngIf="!artistFollowed"></span>
+                                <span class="heart heart-blast" (click)="dislike(artistId)" *ngIf="artistFollowed"></span>
+                                <hr id="colora" style="height: 1px;">
+                </div>
+            </div>
+            <div *ngIf="artistAlbum.length">
+                <p style="font-size:22px;cursor:pointer">albums</p>
+                <div class="scrolling-wrapper">
+                    <div class="cards" *ngFor="let list of artistAlbum[0]; let i=index">
+                        <div id="carouselExampleControls{{i}}" class="carousel slide" data-ride="carousel"
+                            style="width: 100px;height:100px;" data-interval="3000">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="{{list['images'][0]['url']}}" width="100%" height="100%"
+                                        style="cursor:pointer;overflow: hidden;" (click)="albums(list['uri'])">
+                                </div>
+                                <div class="carousel-item" style="width: 100%;height:100%;word-wrap: break-word;">
+                                    <div class="MidnightBlue" style="width: 100px;height:100px; text-align: center; margin: auto;align-items: center;
+                            justify-content: center;
+                            display: flex;font-size:12px;white-space: pre-wrap;color: whitesmoke;">
+                                        {{list['name']}}<br>{{list['artists'][0]['name']}}</div>
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleControls{{i}}" role="button"
+                                data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"
+                                    style="width: 5px;height: 5px;"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControls{{i}}" role="button"
+                                data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"
+                                    style="width: 5px;height: 5px; color:black;"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="artistTracks.length">
+                <p style="font-size:22px;cursor:pointer">tracks</p>
+                <div class="scrolling-wrapper">
+                    <div class="cards" *ngFor="let list of artistTracks[0]; let i=index">
+                        <div id="carouselExampleControl{{i}}" class="carousel slide" data-ride="carousel"
+                            style="width: 100px;height:100px;" data-interval="3000">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active profile-img-container">
+                                    <img src="{{list['album']['images'][0]['url']}}" width="100%" height="100%"
+                                        style="cursor:pointer;">
+                                    <a><i class="fa fa-play" aria-hidden="true" (click)="play(list['uri'])"
+                                            style="float: right; color: forestgreen; border-radius: 100px;"
+                                            onclick="playerss()"></i></a>
+                                </div>
+                                <div class="carousel-item" style="width: 100%;height:100%;word-wrap: break-word;">
+                                    <div class="DarkCyan" style="width: 100px;height:100px; text-align: center; margin: auto;align-items: center;
+                            justify-content: center;
+                            display: flex;font-size:12px;white-space: pre-wrap;color: black;">
+                                        {{list['name']}}</div>
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleControl{{i}}" role="button"
+                                data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"
+                                    style="width: 5px;height: 5px;"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControl{{i}}" role="button"
+                                data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"
+                                    style="width: 5px;height: 5px; color:black;"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="artistSingles.length">
+                <p style="font-size:22px;cursor:pointer">singles</p>
+                <div class="scrolling-wrapper">
+                    <div class="cards" *ngFor="let list of artistSingles[0]; let i=index">
+                        <div id="carouselExampleContros{{i}}" class="carousel slide" data-ride="carousel"
+                            style="width: 100px;height:100px;" data-interval="3000">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active profile-img-container">
+                                    <img src="{{list['images'][0]['url']}}" width="100%" height="100%"
+                                        style="cursor:pointer;">
+                                    <a><i class="fa fa-play" aria-hidden="true" (click)="play(list['uri'])"
+                                            style="float: right; color: forestgreen; border-radius: 100px;"
+                                            onclick="playerss()"></i></a>
+                                </div>
+                                <div class="carousel-item" style="width: 100%;height:100%;word-wrap: break-word;">
+                                    <div class="DarkRed" style="width: 100px;height:100px; text-align: center; margin: auto;align-items: center;
+                            justify-content: center;
+                            display: flex;font-size:12px;white-space: pre-wrap;color: whitesmoke;">
+                                        {{list['name']}}<br>{{list['artists'][0]['name']}}</div>
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleContros{{i}}" role="button"
+                                data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"
+                                    style="width: 5px;height: 5px;"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleContros{{i}}" role="button"
+                                data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"
+                                    style="width: 5px;height: 5px; color:black;"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="artistAppear.length">
+                <p style="font-size:22px;cursor:pointer">collab & featured</p>
+                <div class="scrolling-wrapper">
+                    <div class="cards" *ngFor="let list of artistAppear[0]; let i=index">
+                        <div id="carouselExampleContro{{i}}" class="carousel slide" data-ride="carousel"
+                            style="width: 100px;height:100px;" data-interval="3000">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="{{list['images'][0]['url']}}" width="100%" height="100%"
+                                        style="cursor:pointer;" (click)="albums(list['uri'])">
+                                </div>
+                                <div class="carousel-item" style="width: 100%;height:100%;word-wrap: break-word;">
+                                    <div class="deepblue" style=" width: 100px;height:100px; text-align: center; margin: auto;align-items: center;
+                            justify-content: center;
+                            display: flex;font-size:12px;white-space: pre-wrap;color: whitesmoke;">
+                                        {{list['name']}}<br>{{list['artists'][0]['name']}}</div>
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleContro{{i}}" role="button"
+                                data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"
+                                    style="width: 5px;height: 5px;"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleContro{{i}}" role="button"
+                                data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"
+                                    style="width: 5px;height: 5px; color:black;"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+        </div>
+    </div>
+</div>

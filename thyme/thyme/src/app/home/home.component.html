@@ -1,0 +1,400 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div style="padding-left:1%">
+    <div *ngIf="recents.length" class="scroll">
+        <p style="font-size:22px;cursor:pointer"><span onmouseover="this.classList.add('head')"
+                onmouseout="this.classList.remove('head')">resume from where you left it</span></p>
+        <div class="scrolling-wrapper">
+            <span class="cards" *ngFor="let list of recents; let i=index"
+                style="margin-right: 6px;border-radius: 100px;">
+                <div id="carouselExampleContro{{i}}" data-interval="3000" class="carousel slide" data-ride="carousel"
+                    style="width: 75px;height:75px;border-radius: 100px; margin-top: -2%;">
+                    <div class="carousel-inner" style="border-radius: 100px;">
+                        <div class="carousel-item active profile-img-container">
+                            <img src="{{list['track']['album']['images'][1]['url']}}"
+                                style="width: 75px;height:75px;border-radius: 100px;">
+                            <a><i class="fa fa-play" aria-hidden="true" (click)="play(list['track']['uri'])"
+                                    style="float: right; color: forestgreen; border-radius: 100px;"
+                                    onclick="playerss()"></i></a>
+                        </div>
+                        <div class="carousel-item" style="width: 75px;height:75px;word-wrap: break-word;">
+                            <div style="background-color:#f30a49;width: 75px;height:75px; text-align: center; margin: auto;align-items: center;
+                            justify-content: center;
+                            display: flex;font-size:9px;white-space: pre-wrap;color: whitesmoke;border-radius: 100px;">
+                                {{list['track']['name']}}<br>{{list['track']['artists'][0]['name']}}<br>
+
+                            </div>
+                        </div>
+                        <div class="carousel-item" style="width: 75px;height:75px;word-wrap: break-word;">
+                            <div style="background-color:#2fd0f883;width: 75px;height:75px; text-align: center; margin: auto;align-items: center;
+                            justify-content: center;
+                            display: flex;font-size:9px;white-space: pre-wrap;color: whitesmoke;border-radius: 100px;">
+                                <a (click)="addtoq(list['track']['uri'])">
+                                    <p>Add to Queue<br><i class="fa fa-align-justify" aria-hidden="true"
+                                            style="font-size: 22.5px;"></i></p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleContro{{i}}" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"
+                            style="width: 5px;height: 5px;"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleContro{{i}}" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"
+                            style="width: 5px;height: 5px;"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </span>
+            <span class="cards" style="border-radius: 10px;" *ngIf="nextrecenturi">
+                <div id="carouselExampleControlsx" class="carousel slide" data-ride="carousel"
+                    style="width: 100px;height:100px;" data-interval="3000">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" style="width: 100px;height:100px;text-align: center;"
+                            (click)="nextrecent()">
+                            <i class='fas fa-angle-right' style="cursor: pointer;margin-top: 45px"></i>
+                        </div>
+                        <div class="carousel-item" style="width: 100px;height:100px;word-wrap: break-word;">
+                            <div style="background-color:#FFD700; width: 100px;height:100px; text-align: center; margin: auto;align-items: center;
+                            justify-content: center;
+                            display: flex;font-size:12px;white-space: pre-wrap;color: black;">
+                                More Items -></div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControlsx" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"
+                            style="width: 5px;height: 5px;"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControlsx" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"
+                            style="width: 5px;height: 5px; "></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </span>
+        </div>
+    </div>
+    <div *ngIf="saved.length" class="scroll">
+        <p style="font-size:22px;cursor:pointer">from <span onmouseover="this.classList.add('head')"
+                onmouseout="this.classList.remove('head')">the favourites</span></p>
+        <div class="scrolling-wrapper">
+            <div class="cards" *ngFor="let list of saved"
+                style="width:145px; text-align: center; cursor:pointer;margin-right: 7px;">
+                <div class="card" style="display: flex;border: 0px;">
+                    <div class=" profile-img-container">
+                        <img class="card-img-top" src="{{list['track']['album']['images'][1]['url']}}"
+                            alt="Card image cap" (click)="play(list['track']['uri'])"
+                            style="width:145px;height:145px; border-radius: 15px;">
+                        <a><i class="fa fa-play" aria-hidden="true" (click)="play(list['track']['uri'])"
+                                style="float: right; color: forestgreen; border-radius: 100px;"></i></a></div>
+                    <div class="card-body">
+
+                        <p class="card-title" style="font-size: small; text-overflow: ellipsis;
+                            overflow: hidden;
+                            white-space: nowrap; ">{{list['track']['name']}}</p>
+
+                        <p class="card-text" style="font-size:12px;white-space: pre-wrap;color: grey;">
+                            {{list['track']['artists'][0]['name']}}<br>
+                            <a (click)="addtoq(list['uri'])">
+                                <i class="fa fa-plus" aria-hidden="true"></i>Queue<br></a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="cards" style="width:145px; border-radius: 15px; text-align: center; cursor:pointer"
+                *ngIf="savednexturi">
+                <div class="card profile-img-container" style="display: flex;border: 0px;" (click)="nextsaved()">
+                    <p> <i class='fas fa-angle-right' style="cursor: pointer;margin-top: 45px"></i></p>
+                    <div class="card-body">
+                        <p class="card-text" style="font-size:12px;white-space: pre-wrap;color: grey;">
+                            More items-></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="artist.length" class="scroll">
+        <p style="font-size:22px;cursor:pointer">top <span onmouseover="this.classList.add('head')"
+                onmouseout="this.classList.remove('head')">artists</span></p>
+        <div class="scrolling-wrapper">
+            <div class="cards rounded-lg" style="border-radius: 10px; margin-right: 8px;   "
+                *ngFor="let list of artist; let i=index">
+                <div id="carouselExampleControls{{i}}" class="carousel slide" data-ride="carousel"
+                    style="width: 100px;height:100px;border-radius: 10px; " data-interval="3000">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img (click)="artists(list['href'])" src="{{list['images'][2]['url']}}"
+                                style="width: 100px;height:100px;cursor:pointer;border-radius: 10px; ">
+                        </div>
+                        <div class="carousel-item" style="width: 100px;height:100px;word-wrap: break-word;">
+                            <div style="color:black;background-color: #e0b0ff; width: 100px;height:100px; text-align: center; margin: auto;align-items: center;
+                            justify-content: center;
+                            display: flex;font-size:12px;white-space: pre-wrap;color: black;border-radius: 10px;">
+                                {{list['name']}}<br>Followers:<br>{{list['followers']['total']}}</div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls{{i}}" role="button"
+                        data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"
+                            style="width: 5px;height: 5px;"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls{{i}}" role="button"
+                        data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"
+                            style="width: 5px;height: 5px; "></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+            <span class="cards" style="border-radius: 10px;" *ngIf="nextartisturi">
+                <div id="carouselExampleControlsx" class="carousel slide" data-ride="carousel"
+                    style="width: 100px;height:100px;" data-interval="3000">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" style="width: 100px;height:100px;text-align: center;"
+                            (click)="nextartist()">
+                            <i class='fas fa-angle-right' style="cursor: pointer;margin-top: 45px"></i>
+                        </div>
+                        <div class="carousel-item" style="width: 100px;height:100px;word-wrap: break-word;">
+                            <div style="background-color:#FFD700; width: 100px;height:100px; text-align: center; margin: auto;align-items: center;
+                            justify-content: center;
+                            display: flex;font-size:12px;white-space: pre-wrap;color: black;">
+                                More Items -></div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControlsx" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"
+                            style="width: 5px;height: 5px;"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControlsx" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"
+                            style="width: 5px;height: 5px; "></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+
+            </span>
+        </div>
+    </div>
+
+
+    <div *ngIf="tracks.length" class="scroll">
+        <p style="font-size:22px;cursor:pointer">top <span onmouseover="this.classList.add('head')"
+                onmouseout="this.classList.remove('head')">tracks</span></p>
+        <div class="scrolling-wrapper">
+            <span class="cards" *ngFor="let list of tracks; let i=index" style="margin-right: 6px;">
+                <div id="carouselExampleControl{{i}}" class="carousel slide" style="border-radius: 10px;"
+                    data-ride="carousel" style="width: 100px;height:100px;" data-interval="3000">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active profile-img-container">
+                            <img src="{{list['album']['images'][1]['url']}}"
+                                style="width: 100px;height:100px;border-radius: 10px;">
+                            <a><i class="fa fa-play" aria-hidden="true" (click)="play(list['uri'])"
+                                    style="float: right; color: forestgreen; border-radius: 100px;"
+                                    onclick="playerss()"></i></a>
+                        </div>
+                        <div class="carousel-item" style="width: 100px;height:100px;word-wrap: break-word;">
+                            <div style="background-color:#115173;width: 100px;height:100px; text-align: center; margin: auto;align-items: center;
+                            justify-content: center;
+                            display: flex;font-size:12px;white-space: pre-wrap;color: white;border-radius: 10px;">
+                                {{list['name']}}<br>{{list['album']['artists'][0]['name']}}<br>{{list['album']['name']}}
+                            </div>
+                        </div>
+                        <div class="carousel-item" style="width: 100px;height:100px;word-wrap: break-word;">
+                            <div style="background-color:#d43636d8;width: 100px;height:100px; text-align: center; margin: auto;align-items: center;
+                            justify-content: center;
+                            display: flex;font-size:12px;white-space: pre-wrap;color: whitesmoke;border-radius: 10px;">
+                                <a (click)="addtoq(list['uri'])">
+                                    <p>Add to Queue<br><i class="fa fa-align-justify" aria-hidden="true"
+                                            style="font-size: 30px;"></i></p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControl{{i}}" role="button"
+                        data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"
+                            style="width: 5px;height: 5px;"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControl{{i}}" role="button"
+                        data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"
+                            style="width: 5px;height: 5px;"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </span>
+            <span class="cards" style="border-radius: 10px;" *ngIf="nexttrackuri">
+                <div id="carouselExampleControlsx" class="carousel slide" data-ride="carousel"
+                    style="width: 100px;height:100px;" data-interval="3000">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" style="width: 100px;height:100px;text-align: center;"
+                            (click)="nexttrack()">
+                            <i class='fas fa-angle-right' style="cursor: pointer;margin-top: 45px"></i>
+                        </div>
+                        <div class="carousel-item" style="width: 100px;height:100px;word-wrap: break-word;">
+                            <div style="background-color:#FFD700; width: 100px;height:100px; text-align: center; margin: auto;align-items: center;
+                            justify-content: center;
+                            display: flex;font-size:12px;white-space: pre-wrap;color: black;">
+                                More Items -></div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControlsx" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"
+                            style="width: 5px;height: 5px;"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControlsx" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"
+                            style="width: 5px;height: 5px; "></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+
+            </span>
+        </div>
+    </div>
+
+
+    <div *ngIf="featured.length" class="scroll">
+
+        <p style="font-size:22px;cursor:pointer">popular & <span onmouseover="this.classList.add('head')"
+                onmouseout="this.classList.remove('head')"> trending</span></p>
+
+        <div class="scrolling-wrapper">
+            <div class="cards" *ngFor="let list of featured"
+                style="width:145px; text-align: center;border: 0px;cursor:pointer; margin-right: 7px;">
+                <div class="card" style="display: flex;border: 0px;">
+                    <img class="card-img-top" src="{{list['images'][0]['url']}}" alt="Card image cap"
+                        style="width:145px;height:145px; border-radius: 15px;" (click)="playlists(list['href'])">
+                    <div class="card-body">
+                        <p class="card-title" style="white-space: pre-wrap;">{{list['name']}}</p>
+                        <p class="card-text"
+                            style="font-size:12px;color: grey;  white-space: pre-wrap; text-align: center;text-overflow: ellipsis;">
+                            {{list['description']}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="pods.length" class="scroll">
+        <p style="font-size:22px;cursor:pointer">your<span onmouseover="this.classList.add('head')"
+                onmouseout="this.classList.remove('head')"> podcasts</span></p>
+        <div class="cards rounded-lg" style="border-radius: 10px; margin-right: 8px;"
+            *ngFor="let list of pods; let i=index"
+            style="display: inline-block; padding-right: 10px; padding-bottom: 8px;">
+            <div id="carouselExampleControlse{{i}}" class="carousel slide" data-ride="carousel"
+                style="width: 130px;height:130px;border-radius: 10px; " data-interval="3000">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img (click)="podcasts(list['show']['href'])" src="{{list['show']['images'][1]['url']}}"
+                            style="width: 130px;height:130px;cursor:pointer;border-radius: 10px; ">
+                    </div>
+                    <div class="carousel-item" style="width: 130px;height:130px;word-wrap: break-word;">
+                        <div
+                            style="background-color:rgba(2, 83, 121, 0.459); width: 130px;height:130px; text-align: center; margin: auto;align-items: center;
+                                    justify-content: center;
+                                    display: flex;font-size:12px;white-space: pre-wrap;color: rgb(255, 255, 255);border-radius: 10px;">
+                            {{list['show']['name']}}<br><br>{{list['show']['publisher']}}</div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControlse{{i}}" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true" style="width: 5px;height: 5px;"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControlse{{i}}" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true" style="width: 5px;height: 5px; "></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+
+        <span class="cards" style="border-radius: 10px;" *ngIf="nextpodcast">
+            <div id="carouselExampleControlsxs" class="carousel slide" data-ride="carousel"
+                style="width: 130px;height:130px;border-radius: 10px" data-interval="3000">
+                <div class="carousel-inner">
+                    <div class="carousel-item active"
+                        style="width: 130px;height:130px;text-align: center;border-radius: 10px"
+                        (mouseover)="nextpod()">
+                        <i class='fas fa-angle-right' style="cursor: pointer;margin-top: 45%;border-radius: 10px"></i>
+                    </div>
+                    <div class="carousel-item"
+                        style="width: 130px;height:130px;word-wrap: break-word;border-radius: 10px">
+                        <div style="background-color:rgba(2, 83, 121, 0.459); width: 130px;height:130px; text-align: center; margin: auto;align-items: center;
+                            justify-content: center;
+                            display: flex;font-size:12px;white-space: pre-wrap;color: black;border-radius: 10px">
+                            More Items -></div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControlsxs" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true" style="width: 5px;height: 5px;"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControlsxs" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true" style="width: 5px;height: 5px; "></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </span>
+    </div>
+
+
+    <div *ngIf="release.length" class="scroll">
+
+        <p style="font-size:22px;cursor:pointer">new<span onmouseover="this.classList.add('head')"
+                onmouseout="this.classList.remove('head')"> releases</span></p>
+
+        <div class="scrolling-wrapper">
+            <div class="cards" *ngFor="let list of release"
+                style="width:145px; text-align: center; cursor:pointer; margin-right: 7px;">
+                <div class="card" style="display: flex;border: 0px;">
+                    <a (click)="albums(list['uri'])"><img class="card-img-top" src="{{list['images'][0]['url']}}"
+                            alt="Card image cap" style="width:145px;height:145px; border-radius: 15px;"></a>
+                    <div class="card-body">
+
+                        <p class="card-title" style="font-size: small; text-overflow: ellipsis;
+                            overflow: hidden;
+                            white-space: nowrap; ">{{list['name']}}</p>
+
+                        <p class="card-text" style="font-size:12px;white-space: pre-wrap;color: grey;">
+                            {{list['artists'][0]['name']}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="recommended.length" class="scroll">
+
+        <p style="font-size:22px;cursor:pointer">recommended <span onmouseover="this.classList.add('head')"
+                onmouseout="this.classList.remove('head')"> for you</span></p>
+
+        <div class="scrolling-wrapper">
+            <div class="cards" *ngFor="let list of recommended"
+                style="width:145px; text-align: center;cursor:pointer;margin-right: 7px;">
+                <div class="card" style="display: flex;border: 0px;">
+                    <div class="profile-img-container">
+                        <img class="card-img-top " src="{{list['album']['images'][1]['url']}}" alt="Card image cap"
+                            (click)="play(list['uri'])" style="width:145px;height:145px; border-radius: 15px;">
+                        <a><i class="fa fa-play" aria-hidden="true" (click)="play(list['uri'])"
+                                style="float: right; color: forestgreen; border-radius: 100px;"
+                                onclick="playerss()"></i></a> </div>
+                    <div class="card-body">
+                        <p class="card-title" style="text-overflow: ellipsis;
+                            overflow: hidden;
+                            white-space: nowrap;  font-size: small;">{{list['name']}}</p>
+                        <p class="card-text" style="font-size:12px;white-space: pre-wrap;color: grey;">
+                            {{list['artists'][0]['name']}}<br> <a (click)="addtoq(list['uri'])">
+                                <i class="fa fa-plus" aria-hidden="true"></i>Queue<br></a></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
+</div>

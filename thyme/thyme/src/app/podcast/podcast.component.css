@@ -1,0 +1,30 @@
+#colora {
+    background: linear-gradient(90deg,black, #ee7752, #e73c7e, #160286, #074fbd);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+.content {
+    backdrop-filter: blur(5px) opacity(.3);
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  } 
+  .xalert{
+    backdrop-filter: blur(5px) opacity(.3);
+  }
+  .hearta {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 75%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: url(http://imagizer.imageshack.com/img923/4545/XdJDuY.png) no-repeat;  
+    cursor: pointer;
+    
+  }
+  .heart-blasta {
+    background-position: -2800px 0;
+    transition: background 1s steps(28);
+  }
+  

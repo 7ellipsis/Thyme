@@ -1,0 +1,155 @@
+.card-body
+  {
+    background-color: black;
+    
+  }
+  div{
+    background-color: black;
+  }
+  .cards {
+    display: inline-block;
+    background-color: black;
+  }
+.divone{
+    background: linear-gradient(121deg, #cffd03, #0479af, rgb(14, 49, 63));
+    background-size: 800% 800%;
+    -webkit-animation: AnimationName 6s ease infinite;
+    -moz-animation: AnimationName 6s ease infinite;
+    animation: AnimationName 6s ease infinite;
+    
+}
+.divone:hover
+{
+    box-shadow: 0px 0px 12px 8px rgba(121, 212, 3, 0.445);
+}
+.divtwo:hover
+{
+    box-shadow: 0px 0px 12px 8px rgba(236, 0, 185, 0.445);
+}
+.divthree:hover
+{
+    box-shadow: 0px 0px 12px 8px rgba(200, 197, 1, 0.445);
+}
+.divfour:hover
+{
+    box-shadow: 0px 0px 12px 8px rgba(91, 1, 119, 0.445);
+}
+.divfive:hover
+{
+    box-shadow: 0px 0px 12px 8px rgba(60, 3, 134, 0.445);
+}
+.divtwo{
+    background: linear-gradient(72deg,pink, #9f0037, #09008c);
+    background-size: 600% 600%;
+
+    -webkit-animation: AnimationNames 6s ease infinite;
+    -moz-animation: AnimationNames 6s ease infinite;
+    animation: AnimationNames 6s ease infinite;
+}
+.divthree{
+    background: linear-gradient(72deg, #00749f, #adc005, #a500ca);
+    background-size: 700% 700%;
+
+    -webkit-animation: AnimationNamess 6s ease infinite;
+    -moz-animation: AnimationNamess 6s ease infinite;
+    animation: AnimationNamess 6s ease infinite;
+}
+.divfour
+{
+    background: linear-gradient(264deg, #9f6400, #00cc5f, #811478);
+    background-size: 500% 500%;
+
+    -webkit-animation: AnimationNamessd 6s ease infinite;
+    -moz-animation: AnimationNamessd 6s ease infinite;
+    animation: AnimationNamessd 6s ease infinite;
+}
+
+.divfive
+{
+    background: linear-gradient(264deg, #00ff77, #00e0fd, #68005f,rgb(7, 53, 128),rgba(5, 1, 1, 0.322));
+    background-size: 700% 500%;
+
+    -webkit-animation: AnimationNamessds 6s ease infinite;
+    -moz-animation: AnimationNamessds 6s ease infinite;
+    animation: AnimationNamessds 6s ease infinite;
+}
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 15%}
+    50%{background-position:100% 86%}
+    100%{background-position:0% 15%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 15%}
+    50%{background-position:100% 86%}
+    100%{background-position:0% 15%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 15%}
+    50%{background-position:100% 86%}
+    100%{background-position:0% 15%}
+}
+@-webkit-keyframes AnimationNames {
+    0%{background-position:0% 15%}
+    50%{background-position:100% 86%}
+    100%{background-position:0% 15%}
+}
+@-moz-keyframes AnimationNames {
+    0%{background-position:0% 15%}
+    50%{background-position:100% 86%}
+    100%{background-position:0% 15%}
+}
+@keyframes AnimationNames {
+    0%{background-position:0% 15%}
+    50%{background-position:100% 86%}
+    100%{background-position:0% 15%}
+}
+@-webkit-keyframes AnimationNamess {
+    0%{background-position:67% 0%}
+    50%{background-position:34% 100%}
+    100%{background-position:67% 0%}
+}
+@-moz-keyframes AnimationNamess {
+    0%{background-position:67% 0%}
+    50%{background-position:34% 100%}
+    100%{background-position:67% 0%}
+}
+@keyframes AnimationNamess {
+    0%{background-position:67% 0%}
+    50%{background-position:34% 100%}
+    100%{background-position:67% 0%}
+}
+@-webkit-keyframes AnimationNamessd {
+    0%{background-position:96% 0%}
+    50%{background-position:5% 100%}
+    100%{background-position:96% 0%}
+}
+@-moz-keyframes AnimationNamessd {
+    0%{background-position:96% 0%}
+    50%{background-position:5% 100%}
+    100%{background-position:96% 0%}
+}
+@keyframes AnimationNamessd {
+    0%{background-position:96% 0%}
+    50%{background-position:5% 100%}
+    100%{background-position:96% 0%}
+}
+@-webkit-keyframes AnimationNamessds {
+    0%{background-position:96% 0%}
+    50%{background-position:5% 100%}
+    100%{background-position:96% 0%}
+}
+@-moz-keyframes AnimationNamessds {
+    0%{background-position:96% 0%}
+    50%{background-position:5% 100%}
+    100%{background-position:96% 0%}
+}
+@keyframes AnimationNamessds {
+    0%{background-position:96% 0%}
+    50%{background-position:5% 100%}
+    100%{background-position:96% 0%}
+}
+#colora {
+    background: linear-gradient(-45deg,rgb(251, 226, 0), #ff0000, #ff0062, #110074, #ff0e0e80);
+    background-size: 1000% 1000%;
+    animation: gradient 6s ease infinite;
+  }

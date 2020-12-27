@@ -1,0 +1,69 @@
+<div>
+    <div class="alert alert-dark xalert" id="followe" role="alert" style="position: relative;">
+        Podcast Followed!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="alert alert-danger xalert" id="unfollowe" role="alert" style="position: relative;">
+        Podcast UnFollowed!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="container-fluid" id="main">
+        <div class="row">
+            <div class="col-lg-4" id="cover" [ngStyle]="{'background-image': 'url(' +this.podimage+ ')'}"
+                style="background-size: cover;  background-position: center;overflow: hidden; margin:0; padding:0">
+                <p style="font-size: 40px; padding-left: 14px;" class="content">podcast</p>
+            </div>
+            <div class="col-lg-8" style="height: 100vh;overflow-x:auto;margin:0; width: 100%;">
+                <div [ngStyle]="{'background-image': 'url(' +this.podimage+ ')'}"
+                    style="background-size: cover;  background-position: center;margin:0; padding:0">
+                    <div class="content">
+                        <p style="font-size: 60px;">{{podname}}</p><br>
+                        <span style="font-size: 15px; padding-left: 2%;">{{podartist}}</span>
+                        <span style="font-size: 12px; padding-left: 2%;">{{poditems}} episodes</span>
+                        <br>
+                        <span class="heart" (click)="like(podURI)" *ngIf="!podfollowed"></span>
+                        <span class="heart heart-blast" (click)="dislike(podURI)" *ngIf="podfollowed"></span>
+                        <hr id="colora" style="height: 1px;">
+                    </div>
+                </div>
+                <div>
+                    <span style="display: inline-block;">
+                        <span style="font-size: 40px; display: inline-block;">episodes</span>
+                        <span style="font-size: 12px;  display: inline-block; margin-right: 50%;" class="btn-group">
+                            <button type="button" class="btn btn-secondary">
+                                Sort
+                            </button>
+                            <button class="btn btn-secondary dropdown-toggle dropdown-toggle-split" id="dropdownMenu2"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <button class="dropdown-item" type="button" (click)="sort(0)">Old to New</button>
+                                <button class="dropdown-item" type="button" (click)="sort(1)">New to Old</button>
+                            </div>
+                        </span>
+                    </span>
+                    <ul class="list-group list-group-flush">
+                        <li style="background-color: black; border-bottom-color:gold ;font-size: small;"
+                            class="list-group-item" *ngFor="let list of podcast; let i=index">{{list['name']}}
+                            <p style="color: grey;">
+                                <small>
+                                    <i class="fa fa-play" aria-hidden="true" (click)="play(list['uri'])"> </i>
+                                    <span> {{podname}}</span>
+                                    <span style="float: right;">{{list['duration_ms']}}</span>
+                                </small>
+                            </p>
+                        </li>
+                        <li style="background-color: black; border-bottom-color:gold ;font-size: large;"
+                            class="list-group-item" *ngIf="nextpodcast">
+                            <p style="color: grey; text-align: center;" (click)="nextpod()"><i class="fa fa-angle-down"
+                                    style="font-size: 40px;" aria-hidden="true"></i></p>
+                        </li>
+                    </ul>
+                </div>
+                <br><br>
+            </div>
+        </div>
+    </div>

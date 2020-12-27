@@ -1,0 +1,70 @@
+<div class="container-fluid" id="main">
+    <div class="alert alert-dark xalert" id="follow3" role="alert" style="position: relative;">
+        Followed!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="alert alert-danger xalert" id="unfollow3" role="alert" style="position: relative;">
+        UnFollowed!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="row" style="overflow:hidden;">
+        <div class="col-lg-4" id="cover" [ngStyle]="{'background-image': 'url(' +this.imgUri+ ')'}"
+            style="background-size: cover;  background-position: center;overflow: hidden; ">
+            <p style="font-size: 40px;margin-left: 14px;">playlist</p>
+        </div>
+
+        <div class="col-lg-8 " style="height: 100vh;overflow-x:auto;padding-left: 1px; width: 98%;">
+            <div [ngStyle]="{'background-image': 'url(' +this.imgUri+ ')'}"
+                style="background-size: cover;  background-position: center;" class="sticky-top">
+                <div class="content" style="padding-left: 2%;">
+                    <span style="font-size: 60px;">{{name}}</span>
+                    <p style="font-size: 12px;">{{description}}</p>
+                    <span style="font-size: 12px; padding-left: 2%;">Made By- {{owner}}</span>
+                    <span style="font-size: 12px; padding-left: 2%;">Followers: {{followers}}</span>
+                    <span style="font-size: 12px; padding-left: 2%;">{{items}} tracks</span>
+                    <span> <input type="text" class="btn btn-primary" [(ngModel)]="searchText" placeholder="search tracks"/></span><br>
+                    <span class="heart" (click)="like(playlistURI,'e')" *ngIf="!playlistfollowed"></span>
+                    <span class="heart heart-blast" (click)="dislike(playlistURI,'e')" *ngIf="playlistfollowed"></span>
+                  
+                    <hr id="colora" style="height: 1px;">
+                </div>
+               
+            </div>
+            <div style="font-size: 50px; padding-left: 2%;">
+                tracks
+            </div>
+            <div>
+                <ul class="list-group list-group-flush">
+                    <li style="background-color: black; border-bottom-color:gold ; font-size: large;"
+                        class="list-group-item" *ngFor="let list of myList  | filter : searchText; let i=index">{{list['track']['name']}}
+                        <p style="color: grey;"><small><i class="fa fa-play" aria-hidden="true"
+                                    (click)="play(list['track']['uri'])"> </i>
+                                <span> {{list['track']['artists'][0]['name']}} <i class="fa fa-circle"
+                                        style="font-size: 4px;" aria-hidden="true"></i></span>
+                                <span> {{list['track']['album']['name']}}</span>
+                               
+                                <span style="float: right;">
+                                    <span> <a (click)="addtoq(list['uri'])">
+                                        <i class="fa fa-plus" aria-hidden="true"></i>Queue<br></a></span>
+                                    {{list['track']['duration_ms']}}</span>
+                                <span class="hearta" id=a+{{i}} #one (click)="like(list['track']['uri'],one)"
+                                    *ngIf="!list['track']['liked']"></span>
+                                <span class="hearta heart-blasta" id=b+{{i}} #two
+                                    (click)="dislike(list['track']['uri'],two)" *ngIf="list['track']['liked']"></span>
+                            </small>
+                        </p>
+                    </li>
+                    <li style="background-color: black; border-bottom-color:gold ;font-size: large;"
+                        class="list-group-item" *ngIf="nextplaylist">
+                        <p style="color: grey; text-align: center;" (click)="nextplaylistsongs()"><i
+                                class="fa fa-angle-down" style="font-size: 40px;" aria-hidden="true"></i></p>
+                    </li>
+                </ul>
+            </div>
+            <br><br>
+        </div>
+    </div>
