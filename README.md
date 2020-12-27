@@ -38,4 +38,4 @@ Has its own recommendation system
 One click login
 
 
-For samples check UI folder
+For samples check images in repo
