@@ -15,7 +15,7 @@ export class CallbackComponent implements OnInit, AfterViewInit {
   
   title = 'thyme';
   _token = '';
-  client_id = 'c950c38b7fd143859e60579877d1ab8b';
+  client_id = '';
   redirect = 'http://localhost:4200/callback';
   _device_id = '';
   // scope = "user-read-recently-played playlist-modify user-read-email user-top-read playlist-read-private user-modify-playback-state streaming playlist-modify-private user-read-recently-played";
@@ -26,7 +26,7 @@ export class CallbackComponent implements OnInit, AfterViewInit {
  show_album:boolean;
  show_artist:boolean;
  show_playlist:boolean;
-client_secret = 'a0eecd14b2f64bd8b3c1e8ff33c90e0a';
+client_secret = '';
 redirect_uri = 'http://localhost:4200/callback';
 scope = "user-read-private user-follow-read,user-follow-modify user-library-modify user-read-playback-state user-library-read playlist-modify user-read-email user-top-read playlist-read-private user-modify-playback-state streaming playlist-modify-private user-read-recently-played";
   ngAfterViewInit() {
