@@ -10,7 +10,7 @@ npm install
 
 Get your public and private keys from spotify and replace them in the server.js file.
 
-https://developer.spotify.com/dashboard/ Reister an application, get your keys, add redirect as http://localhost:4200/callback
+https://developer.spotify.com/dashboard/ Register an application, get your keys, add redirect as http://localhost:4200/callback
 
 Play!
 
